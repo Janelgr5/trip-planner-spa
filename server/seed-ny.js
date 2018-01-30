@@ -8,7 +8,7 @@ var {
   Hotel,
   Restaurant,
   Activity
-} = require('./models');
+} = require('../models');
 
 var data = {
   hotel: [
@@ -544,8 +544,7 @@ var data = {
   ]
 };
 
-db
-  .sync({ force: true })
+db.sync({ force: true })
   .then(function() {
     console.log("Dropped old data, now inserting data");
     return Promise.map(Object.keys(data), function(name) {
