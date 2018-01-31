@@ -57,6 +57,8 @@ const Restaurant = db.define('restaurant', {
 });
 
 //Associations
+//tables have a placeId
+//attraction instances have getPlace, setPlace, and removePlace
 Hotel.belongsTo(Place);
 Restaurant.belongsTo(Place);
 Activity.belongsTo(Place);

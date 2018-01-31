@@ -10,7 +10,7 @@ const {db, Place, Hotel, Restaurant, Activity} = require('../models');
 
 //an /api route to retrieve all the hotels, restaurants, and activities 
 //from the database and subsequently return them as JSON.
-router.get('/', (req, res, next)=>{
+router.get('/attractions', (req, res, next)=>{
     //bluebird; takes an array of promises
     //returns a promise (array of data) only after all of these asynchronous calls (promises) have completed
     Promise.all([
@@ -31,6 +31,7 @@ router.get('/', (req, res, next)=>{
             activities
         })
     })
+    .catch(next);
 });
 
 module.exports = router;

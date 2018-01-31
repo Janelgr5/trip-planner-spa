@@ -18,13 +18,12 @@ const map = new mapboxgl.Map({
 
 //fetch the list of hotels, restaurants and attractions from the server using Ajax
 //fetch returns a response that's an object
-//call the fetch funciton passing the url of the api as a parameter
-fetch('/api')
+//call the fetch function passing the url of the api as a parameter
+fetch('/api/attractions')
 //handles data as a JSON object - transforms the data into json
 .then(response => response.json())
 .then(data => {
   //code for handling the data you get from the api
-  console.log(data)
   data.restaurants.forEach(restaurant =>{
     //get the select where we will place our options
     const select = document.getElementById('restaurants-choices')
@@ -48,17 +47,52 @@ fetch('/api')
     newOption = document.createElement('option');
     newOption.nodeValue = hotel.id;
     newOption.innerText = hotel.name;
-    select.appendChild(newOption);
+    //for lines 48-50 can also do:
+    //newOption = new Option(hotel.name, hotel.id);
+    select.append(newOption);
   })
   data.activities.forEach(activity =>{
     select = document.getElementById('activities-choices')
     newOption = document.createElement('option');
     newOption.nodeValue = activity.id;
     newOption.innerText = activity.name;
-    select.appendChild(newOption);
+    select.append(newOption);
   })
 })
-.catch(error =>{
-  console.log(error);
-})
+.then(data => {
+  //code for handling the data you get from the api
+  data.restaurants.forEach(restaurant =>{
+    //get the "restaurants-add" button DOM element
+    const addButton = document.getElementById('restaurants-add')
+    addButton.onclick = ()=>{
+      const select = document.getElementById('restaurants-list')
+      const selectedId = select.value;
+      const itineraryItem = document.createElement('li');
+      itineraryItem.innerText = restaurant.name;
+      select.append(itineraryItem);
+    }
+  })
+  // data.restaurants.forEach(restaurant =>{
+  //   //get the "restaurants-add" button DOM element
+  //   const addButton = document.getElementById('restaurants-choices')
+  //   addButton.addEventListener('click', (restaurants)=>{
+  //     const select = document.getElementById('restaurants-list')
+  //     const selectedId = select.value;
+  //     const itineraryItem = document.createElement('li');
+  //     itineraryItem.innerText = restaurant.name;
+  //     select.appendChild(itineraryItem);
+  //   })
+  // })
 
+  // data.restaurants.forEach(restaurant =>{
+  //   //get the "restaurants-add" button DOM element
+  //   const addButton = document.getElementById('restaurants-choices')
+  //   addButton.addEventListener('click', (restaurants)=>{
+  //     const select = document.getElementById('restaurants-list')
+  //     const selectedId = select.value;
+  //     const itineraryItem = document.createElement('li');
+  //     itineraryItem.innerText = restaurant.name;
+  //     select.appendChild(itineraryItem);
+  //   })
+  // })
+})
