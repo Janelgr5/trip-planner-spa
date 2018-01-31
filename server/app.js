@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 //API routes: data meant to be read/written via AJAX (static/page rendering routes)
 //Put /api so we don't have to keep repeating that path in routes/index.js
+//only for developers' eyes, not the client
 app.use('/api', routes);
 
 // catch 404 (i.e., no route was hit) and forward to error handler
