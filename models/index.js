@@ -17,7 +17,7 @@ const Place = db.define('place', {
     location:{
         type: Sequelize.ARRAY(Sequelize.FLOAT)
     }
-})
+});
 
 const Hotel = db.define('hotel', {
     name: {
@@ -29,7 +29,7 @@ const Hotel = db.define('hotel', {
     amenities: {
         type: Sequelize.STRING
     }
-})
+});
 
 const Activity = db.define('activity', {
     name: {
@@ -38,7 +38,7 @@ const Activity = db.define('activity', {
     age_range: {
         type: Sequelize.STRING
     }
-})
+});
 
 const Restaurant = db.define('restaurant', {
     name: {
@@ -48,10 +48,15 @@ const Restaurant = db.define('restaurant', {
         type: Sequelize.STRING
     },
     price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        validate: {
+            min: 1,
+            max: 5
+        }
     }
-})
+});
 
+//Associations
 Hotel.belongsTo(Place);
 Restaurant.belongsTo(Place);
 Activity.belongsTo(Place);

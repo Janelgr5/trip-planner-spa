@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const path = require("path");
+const routes = require('../routes');
 
 const db = require("../models/index.js").db;
 
@@ -15,6 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, "..", "public")));
+
+//API routes: data meant to be read/written via AJAX (static/page rendering routes)
+//Put /api so we don't have to keep repeating that path in routes/index.js
+app.use('/api', routes);
 
 // catch 404 (i.e., no route was hit) and forward to error handler
 app.use(function(req, res, next) {
