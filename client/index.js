@@ -17,6 +17,7 @@ const map = new mapboxgl.Map({
 // marker.addTo(map);
 
 //fetch the list of hotels, restaurants and attractions from the server using Ajax
+//fetch from the backend and bring to the frontend
 //fetch returns a response that's an object
 //call the fetch function passing the url of the api as a parameter
 fetch('/api/attractions')
@@ -32,8 +33,7 @@ fetch('/api/attractions')
     const newOption = document.createElement('option');
 
     //set the option's value
-    //where can i find this method to look up documentation?
-    newOption.nodeValue = restaurant.id;
+    newOption.value = restaurant.id;
 
     //set the option's text to that option's name
     newOption.innerText = restaurant.name;
@@ -45,7 +45,7 @@ fetch('/api/attractions')
   data.hotels.forEach(hotel =>{
     select = document.getElementById('hotels-choices')
     newOption = document.createElement('option');
-    newOption.nodeValue = hotel.id;
+    newOption.value = hotel.id;
     newOption.innerText = hotel.name;
     //for lines 48-50 can also do:
     //newOption = new Option(hotel.name, hotel.id);
@@ -54,45 +54,9 @@ fetch('/api/attractions')
   data.activities.forEach(activity =>{
     select = document.getElementById('activities-choices')
     newOption = document.createElement('option');
-    newOption.nodeValue = activity.id;
+    newOption.value = activity.id;
     newOption.innerText = activity.name;
     select.append(newOption);
   })
 })
-.then(data => {
-  //code for handling the data you get from the api
-  data.restaurants.forEach(restaurant =>{
-    //get the "restaurants-add" button DOM element
-    const addButton = document.getElementById('restaurants-add')
-    addButton.onclick = ()=>{
-      const select = document.getElementById('restaurants-list')
-      const selectedId = select.value;
-      const itineraryItem = document.createElement('li');
-      itineraryItem.innerText = restaurant.name;
-      select.append(itineraryItem);
-    }
-  })
-  // data.restaurants.forEach(restaurant =>{
-  //   //get the "restaurants-add" button DOM element
-  //   const addButton = document.getElementById('restaurants-choices')
-  //   addButton.addEventListener('click', (restaurants)=>{
-  //     const select = document.getElementById('restaurants-list')
-  //     const selectedId = select.value;
-  //     const itineraryItem = document.createElement('li');
-  //     itineraryItem.innerText = restaurant.name;
-  //     select.appendChild(itineraryItem);
-  //   })
-  // })
 
-  // data.restaurants.forEach(restaurant =>{
-  //   //get the "restaurants-add" button DOM element
-  //   const addButton = document.getElementById('restaurants-choices')
-  //   addButton.addEventListener('click', (restaurants)=>{
-  //     const select = document.getElementById('restaurants-list')
-  //     const selectedId = select.value;
-  //     const itineraryItem = document.createElement('li');
-  //     itineraryItem.innerText = restaurant.name;
-  //     select.appendChild(itineraryItem);
-  //   })
-  // })
-})
